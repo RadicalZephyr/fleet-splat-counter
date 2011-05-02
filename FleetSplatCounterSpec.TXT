@@ -1,0 +1,67 @@
+Additional output on Webpage:
+- list of all players fleet has splatted on (should have lower limit?)
+- list of all fleet member splat totals (broken down by splattee)
+
+
+
+possible format:
+
+Splattee - Splattee-total
+- fleetplayername : splats on splattee
+- nextfleetpn     : "
+...
+- lastfleetpn     : "
+
+and/or:
+
+fleet playername - totalsplatsoneveryone
+etc.
+etc.
+
+
+Pseudocode
+
+Get Data
+(
+Read attack event log (all pages)
+create list of all events
+weed list of non-splats
+) -> list of event objects for all splats in event log 'splatlog'
+
+Process Data
+
+splatlog -> splattee count
+(
+get defender player id from all events
+don't make duplicate entries for players splatted multiple times
+) -> list of all splattee's with id's 'splatteelist'
+
+splatlog -> splatterer count
+(
+get fleetplayer id from all events
+don't duplicate entries for players who splat multiple times
+) -> list of all splatter's with id's 'splatterlist'
+
+splatlog -> tally X
+(
+for each event add to player's tally on appropriate list
+) -> fully tallied splattelist and splatterlist
+
+Output Data
+unknown
+
+
+
+
+Data Structures
+
+splatterList
+- ordered list of all splatter's
+- indexes on all UID's of above that contain another list
+sublist
+- same structure as exterior list, but for splattee's that have been
+   splatted by the splatter, and the indexed list has the total
+
+splatteeList
+- orderedlist of all splattee's
+- index of UID's of above contain total # of splats on them
